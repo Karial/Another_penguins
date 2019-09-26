@@ -26,10 +26,6 @@ StackController controller;
 // Обработчик сообщений для окна.
 INT_PTR CALLBACK Controller(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	static Stack s1;
-	static Stack s2;
-	static StackView view;
-	static StackController controller;
 	view.SetDlg(hDlg);
 	UNREFERENCED_PARAMETER(lParam);
 	switch (message)
