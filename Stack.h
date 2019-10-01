@@ -2,7 +2,14 @@
 
 #include<string>
 
-class Stack {
+class StackIterator;
+
+class Iterable {
+	virtual StackIterator begin() const = 0;
+};
+
+class Stack: public Iterable {
+	friend StackIterator;
 private:
 	std::string* container;
 	size_t capacity;
@@ -18,18 +25,23 @@ public:
 	int Size() const;
 	std::string GetTopElement() const;
 	std::string* GetArr() const;
+	StackIterator begin() const override;
 };
 
-bool operator==(const Stack& lhs, const Stack& rhs);
-
-class Iterator {
+class StackIterator {
 private:
 	const Stack* s;
 	int ind;
 public:
-	Iterator(const Stack& s_, const int ind_ = 0);
+	StackIterator() = default;
+	StackIterator(const Stack& s_, const int ind_ = 0);
 	std::string Val() const;
 	bool Next();
 	bool Prev();
-	bool IsCorrect() const;
+	bool HasNext() const;
+	bool HasPrev() const;
+	bool IsValid() const;
+	void Copy(const StackIterator& copy);
 };
+
+bool operator==(const Stack& lhs, const Stack& rhs);
