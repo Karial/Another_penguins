@@ -11,4 +11,5 @@ public:
 	virtual void DeletePenguin(int ind) = 0;
 	virtual void CompareStacks(bool are_equal) = 0;
 	virtual bool HandleEvent(WPARAM wParam) = 0;
+	virtual void ShowSize(int size) = 0;
 };

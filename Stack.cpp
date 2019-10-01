@@ -70,8 +70,8 @@ bool operator==(const Stack& lhs, const Stack& rhs) {
 		return false;
 	}
 	else {
-		Iterator it1(lhs), it2(rhs);
-		while (it1.IsCorrect() && it2.IsCorrect()) {
+		StackIterator it1(lhs), it2(rhs);
+		while (it1.HasNext() && it2.HasNext()) {
 			std::string str = it1.Val();
 			str = it2.Val();
 			if (it1.Val() != it2.Val()) {
@@ -84,13 +84,17 @@ bool operator==(const Stack& lhs, const Stack& rhs) {
 	}
 }
 
-Iterator::Iterator(const Stack& s_, const int ind_) :s(&s_), ind(ind_) {}
+StackIterator Stack::begin() const {
+	return StackIterator(*this, 0);
+}
 
-std::string Iterator::Val() const {
+StackIterator::StackIterator(const Stack& s_, const int ind_) :s(&s_), ind(ind_) {}
+
+std::string StackIterator::Val() const {
 	return s->GetArr()[ind];
 }
 
-bool Iterator::Next() {
+bool StackIterator::Next() {
 	ind++;
 	if (ind >= s->Size()) {
 		return false;
@@ -100,7 +104,7 @@ bool Iterator::Next() {
 	}
 }
 
-bool Iterator::Prev() {
+bool StackIterator::Prev() {
 	ind--;
 	if (ind < 0) {
 		return false;
@@ -110,6 +114,18 @@ bool Iterator::Prev() {
 	}
 }
 
-bool Iterator::IsCorrect() const {
-	return (ind >= 0 && ind < s->Size());
+bool StackIterator::HasNext() const {
+	return (ind + 1 < s->Size());
+}
+
+bool StackIterator::HasPrev() const {
+	return (ind - 1 >= 0);
+}
+
+bool StackIterator::IsValid() const {
+	return (ind < s->Size());
+}
+
+void StackIterator::Copy(const StackIterator& copy) {
+	ind = copy.ind;
 }
