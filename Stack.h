@@ -1,6 +1,10 @@
 #pragma once
 
 #include<string>
+#include<vector>
+#include<ctime>
+#include<cstdlib>
+#include"Visitor.h"
 
 class StackIterator;
 
@@ -8,7 +12,11 @@ class Iterable {
 	virtual StackIterator begin() const = 0;
 };
 
-class Stack: public Iterable {
+class Group {
+	virtual void Accept(Visitor& vis) = 0;
+};
+
+class Stack: public Iterable, public Group {
 	friend StackIterator;
 private:
 	std::string* container;
@@ -26,6 +34,7 @@ public:
 	std::string GetTopElement() const;
 	std::string* GetArr() const;
 	StackIterator begin() const override;
+	void Accept(Visitor& vis) override;
 };
 
 class AbstractIterator {
@@ -54,3 +63,17 @@ public:
 };
 
 bool operator==(const Stack& lhs, const Stack& rhs);
+
+class Crowd : public Group {
+private:
+	std::vector<std::string> _crowd;
+public:
+	std::string random_string[12] = { "dfgdf","dfgdfgdfg","cvbcbcvb","ertfdfgv","qdmflvmdfv","povonvnanvfd","pprvkdfvd","dfd","aqef","dfvdvtdf", "dfgerg","fdgdvdgv" };
+	explicit Crowd();
+	void DeleteRandomHuman();
+	std::string GetHumanWithIndex(size_t ind) const;
+	void RandomCrowd();
+	size_t GetSize();
+	const std::vector<std::string> GetArray();
+	void Accept(Visitor& vis) override;
+};

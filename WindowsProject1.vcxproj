@@ -149,15 +149,18 @@
   <ItemGroup>
     <ClInclude Include="AbstractController.h" />
     <ClInclude Include="AbstractView.h" />
+    <ClInclude Include="Casher.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="StackController.h" />
     <ClInclude Include="StackView.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Visitor.h" />
     <ClInclude Include="WindowsProject1.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Casher.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="StackController.cpp" />
     <ClCompile Include="StackView.cpp" />

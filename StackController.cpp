@@ -14,6 +14,8 @@ StackController::StackController() {
 	_ideal->Push("Vlad");
 	_ideal->Push("Leha");
 	_it = new StackIterator(*_s, -1);
+	_crowd = new Crowd();
+	_casher = new Casher();
 }
 
 void StackController::SetView(StackView* view) {
@@ -68,4 +70,19 @@ void StackController::Prev() {
 		_it->Prev();
 		_view->ChangeIteratorEdit(_it->Val());
 	}
+}
+
+void StackController::RandomCrowd() {
+	_crowd->RandomCrowd();
+	_view->ShowCrowd(_crowd->GetArray());
+}
+
+void StackController::StackVisit() {
+	_casher->VisitStack(*_s);
+	_view->DeletePenguin(_s->Size());
+}
+
+void StackController::CrowdVisit() {
+	_casher->VisitCrowd(*_crowd);
+	_view->ShowCrowd(_crowd->GetArray());
 }

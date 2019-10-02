@@ -71,6 +71,15 @@ bool StackView::HandleEvent(WPARAM wParam) {
 	if (LOWORD(wParam) == IDC_PREV) {
 		_controller->Prev();
 	}
+	if (LOWORD(wParam) == IDC_RANDOM_CROWD) {
+		_controller->RandomCrowd();
+	}
+	if (LOWORD(wParam) == IDC_SERVE_STACK) {
+		_controller->StackVisit();
+	}
+	if (LOWORD(wParam) == IDC_SERVE_CROWD) {
+		_controller->CrowdVisit();
+	}
 	if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
 	{
 		EndDialog(_hDlg, LOWORD(wParam));
@@ -87,4 +96,11 @@ void StackView::ChangeIteratorEdit(const std::string& str) const {
 	char buf[100];
 	strcpy_s(buf, str.c_str());
 	SetWindowText(GetDlgItem(_hDlg, IDC_ITERATOR), (LPCSTR)buf);
+}
+
+void StackView::ShowCrowd(const std::vector<std::string>& Crowd) {
+	SendDlgItemMessage(_hDlg, IDC_Crowd, LB_RESETCONTENT, 0, 0);
+	for (auto& s : Crowd) {
+		SendDlgItemMessage(_hDlg, IDC_Crowd, LB_ADDSTRING, 0, (LPARAM)s.c_str());
+	}
 }

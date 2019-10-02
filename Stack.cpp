@@ -65,6 +65,10 @@ Stack::~Stack() {
 	delete[] container;
 }
 
+void Stack::Accept(Visitor& vis) {
+	vis.VisitStack(*this);
+}
+
 bool operator==(const Stack& lhs, const Stack& rhs) {
 	if (lhs.Size() != rhs.Size()) {
 		return false;
@@ -128,4 +132,42 @@ bool StackIterator::IsValid() const {
 
 void StackIterator::Copy(const StackIterator& copy) {
 	ind = copy.ind;
+}
+
+Crowd::Crowd() {
+	_crowd = {};
+}
+
+void Crowd::DeleteRandomHuman() {
+	if (!_crowd.empty()) {
+		_crowd.erase(begin(_crowd) + rand() % _crowd.size());
+	}
+}
+
+std::string Crowd::GetHumanWithIndex(size_t ind) const {
+	if (ind < _crowd.size()) {
+		return _crowd[ind];
+	}
+	else {
+		return "";
+	}
+}
+
+void Crowd::RandomCrowd() {
+	_crowd.resize(rand() % 15);
+	for (int i = 0; i < _crowd.size(); ++i) {
+		_crowd[i] = random_string[rand() % 12];
+	}
+}
+
+size_t Crowd::GetSize() {
+	return _crowd.size();
+}
+
+const std::vector<std::string> Crowd::GetArray() {
+	return _crowd;
+}
+
+void Crowd::Accept(Visitor& vis) {
+	vis.VisitCrowd(*this);
 }
