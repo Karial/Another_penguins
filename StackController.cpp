@@ -78,11 +78,11 @@ void StackController::RandomCrowd() {
 }
 
 void StackController::StackVisit() {
-	_casher->VisitStack(*_s);
+	_s->Accept(*_casher);
 	_view->DeletePenguin(_s->Size());
 }
 
 void StackController::CrowdVisit() {
-	_casher->VisitCrowd(*_crowd);
+	_crowd->Accept(*_casher);
 	_view->ShowCrowd(_crowd->GetArray());
 }
