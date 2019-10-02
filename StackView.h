@@ -20,7 +20,7 @@ public:
 	bool HandleEvent(WPARAM wParam) override;
 	void ResetIterator();
 	void ChangeIteratorEdit(const std::string& str) const;
-
+	void ShowCrowd(const std::vector<std::string>& Crowd);
 private:
 	HWND _hDlg;
 	AbstractController* _controller;
